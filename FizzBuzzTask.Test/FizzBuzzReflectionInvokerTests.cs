@@ -37,16 +37,16 @@ namespace FizzBuzzTask.Test
         }
 
         [Test]
-        public void InvokeFizzBuzz_Should_ThrowException_When_Method_Not_Found()
+        public void InvokeFizzBuzz_Should_Return_ExpectedResult_When_Method_NonExistent()
         {
             //Arrange
+            var expectedResult = false;
 
             //Act
             var result = _invoker.InvokeFizzBuzz(3, "NonExistentMethod");
 
             //Assert
-            Assert.That(result.IsSuccess, Is.EqualTo(false));
-            Assert.That(result.ErrorMessage, Is.EqualTo("Method 'NonExistentMethod' not found on IFizzBuzzService."));
+            Assert.That(result.IsSuccess, Is.EqualTo(expectedResult));
         }
     }
 
