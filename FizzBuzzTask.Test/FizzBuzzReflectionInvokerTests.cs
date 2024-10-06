@@ -32,7 +32,8 @@ namespace FizzBuzzTask.Test
             var result = _invoker.InvokeFizzBuzz(number, methodName);
 
             //Assert
-            Assert.That(result.WasSuccessful, Is.EqualTo(expected));
+            Assert.That(result.IsSuccess, Is.EqualTo(true));
+            Assert.That(result.Value, Is.EqualTo(expected));
         }
 
         [Test]
@@ -44,12 +45,8 @@ namespace FizzBuzzTask.Test
             var result = _invoker.InvokeFizzBuzz(3, "NonExistentMethod");
 
             //Assert
-            Assert.That(result.WasSuccessful, Is.EqualTo(false));
+            Assert.That(result.IsSuccess, Is.EqualTo(false));
             Assert.That(result.ErrorMessage, Is.EqualTo("Method 'NonExistentMethod' not found on IFizzBuzzService."));
-
-            // Act & Assert: Check if the exception is thrown for an invalid method name
-            var ex = Assert.Throws<ArgumentException>(() => );
-            Assert.That(ex.Message, Is.EqualTo("Method 'NonExistentMethod' not found on IFizzBuzzService."));
         }
     }
 
