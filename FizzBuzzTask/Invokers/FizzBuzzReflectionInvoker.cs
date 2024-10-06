@@ -14,7 +14,21 @@ namespace FizzBuzzTask.Invokers
 
         public StringReturnModel InvokeFizzBuzz(int number, string methodName)
         {
-            throw new NotImplementedException();
+            var invokeReturnValue = new StringReturnModel();
+
+            try
+            {
+                var method = typeof(IFizzBuzzService).GetMethod(methodName);
+                var invokeMethodResult = (string)method.Invoke(_service, new object[] { number });
+
+                invokeReturnValue.Value = invokeMethodResult;                
+            }
+            catch (Exception ex)
+            {
+                invokeReturnValue.ErrorMessage = ex.Message;
+            }
+
+            return invokeReturnValue;
         }
     }
 }
